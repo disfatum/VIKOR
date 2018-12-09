@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="616.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.vikor.controller.SettingsController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="491.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TitledPane animated="false" collapsible="false" prefHeight="89.0" prefWidth="400.0" text="Коэффициент v">
+                     <content>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="coef_v" alignment="CENTER" promptText="Введите значение коэф.">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" prefHeight="106.0" prefWidth="400.0" text="Коэф. Q от v (укажите количество исследумых значений)">
+                     <content>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="QV_counter" alignment="CENTER" promptText="Введите значение" />
+                              <Label text="с шагом:">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="Qvstep" prefHeight="31.0" prefWidth="129.0" promptText="Введите шаг" />
+                           </children>
+                        </HBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" prefHeight="96.0" prefWidth="400.0" text="Коэф. S,R к весу (укажите количество исследуемых значений)">
+                     <content>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="SR_counter" alignment="CENTER" promptText="Введите значение" />
+                              <Label text="с шагом:">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="SRstep" prefHeight="31.0" prefWidth="129.0" promptText="Введите шаг" />
+                           </children>
+                        </HBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" prefHeight="117.0" prefWidth="460.0" text="Выбор обрабатываемых значений">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="BoolButton" layoutX="107.0" layoutY="32.0" mnemonicParsing="false" text="Использовать нечеткую логику" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" prefHeight="108.0" prefWidth="491.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="OkButton" layoutX="38.0" layoutY="34.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="208.0" text="Подтвердить изменения" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="10.0" />
+                              <Button fx:id="CencelButton" layoutX="241.0" layoutY="34.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="195.0" text="Отмена" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="51.0" prefWidth="479.0" style="-fx-background-color: #2e3348;" BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <AnchorPane prefHeight="50.0" prefWidth="491.0" style="-fx-background-color: #2e3348;" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

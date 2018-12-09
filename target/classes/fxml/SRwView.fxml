@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="1105.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.vikor.controller.SRwController">
+   <children>
+      <BorderPane prefHeight="657.0" prefWidth="973.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="50.0" prefWidth="973.0" style="-fx-background-color: #2e3348;" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="50.0" prefWidth="973.0" style="-fx-background-color: #2e3348;" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <SplitPane dividerPositions="0.5240253853127833" prefHeight="655.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <SplitPane dividerPositions="0.2778702163061564" layoutX="114.0" layoutY="115.0" orientation="VERTICAL" prefHeight="603.0" prefWidth="574.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <TitledPane animated="false" collapsible="false" layoutX="47.0" layoutY="14.0" prefHeight="297.0" prefWidth="572.0" text="Зависимость S от веса" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <content>
+                                                <TextArea fx:id="TextAreaS" prefHeight="200.0" prefWidth="200.0" />
+                                             </content>
+                                          </TitledPane>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <LineChart fx:id="ChartS" animated="false" layoutX="-107.0" layoutY="-85.0" prefHeight="296.0" prefWidth="572.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+                                            <xAxis>
+                                              <NumberAxis autoRanging="false" minorTickCount="0" side="BOTTOM" tickLabelsVisible="false" upperBound="1.0" fx:id="xAxisS" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis fx:id="yAxisS" side="LEFT" />
+                                            </yAxis>
+                                          </LineChart>
+                                          <Slider fx:id="SliderS" layoutX="117.0" layoutY="246.0" majorTickUnit="0.01" max="1.0" minorTickCount="0" prefHeight="20.0" prefWidth="572.0" showTickLabels="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="15.0">
+                                             <padding>
+                                                <Insets left="40.0" />
+                                             </padding>
+                                          </Slider>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.27860696517412936" orientation="VERTICAL" prefHeight="603.0" prefWidth="574.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <TitledPane animated="false" collapsible="false" layoutX="47.0" layoutY="14.0" prefHeight="297.0" prefWidth="572.0" text="Зависимость R от веса" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <content>
+                                          <TextArea fx:id="TextAreaR" prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <LineChart fx:id="ChartR" animated="false" layoutX="-107.0" layoutY="-85.0" prefHeight="296.0" prefWidth="572.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                                       <xAxis>
+                                          <NumberAxis autoRanging="false" side="BOTTOM" tickLabelsVisible="false" fx:id="xAxisR" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis fx:id="yAxisR" side="LEFT" />
+                                       </yAxis>
+                                    </LineChart>
+                                    <Slider fx:id="SliderR" blockIncrement="0.0" layoutX="117.0" layoutY="246.0" majorTickUnit="0.01" max="1.0" minorTickCount="0" prefHeight="40.0" prefWidth="507.0" showTickLabels="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0">
+                                       <padding>
+                                          <Insets left="40.0" />
+                                       </padding>
+                                    </Slider>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                    </items>
+                  </SplitPane>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1105.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Выберите критерий для анализа:">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <ComboBox fx:id="ComboBox" prefHeight="31.0" prefWidth="212.0" />
+                        <Button fx:id="OkButton" mnemonicParsing="false" prefHeight="31.0" text="Подтвердить">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
