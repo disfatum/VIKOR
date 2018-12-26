@@ -32,7 +32,7 @@ public class VikorCalculation {
 	
 	public void VikorCalcule(ObservableList<List<Double>> data,
 			ObservableList<FunctionData> l) {
-		d = data;
+		//d = data;
 		ObservableList<List<Double>> Sdata = FXCollections.observableArrayList();
 		
 		
@@ -44,7 +44,9 @@ public class VikorCalculation {
 			}
 				Sdata.add(bf);
 		}
-		System.out.println(Sdata.toString()+"bf");
+		d = data;
+		System.out.println(data.toString()+"bf");
+		System.out.println(Sdata.toString()+"sbf");
 		int Asize = data.size();//���������� �����������
 		size = Asize;
 		int Fsize = data.get(0).size();//���������� ���������
@@ -86,9 +88,9 @@ public class VikorCalculation {
 					stars = Collections.min(Sdata1.get(i));
 					
 				}
-				star.add(stars);
+				
+			}star.add(stars);
 			minus.add(starm);
-			}
 			
 		}
 		System.out.println(star.toString()+" star");
@@ -101,13 +103,15 @@ public class VikorCalculation {
 		for(int i  = 0; i < Asize; i++) {
 			double e = 0;
 			R_buf = FXCollections.observableArrayList();
-			for(int j  = 0; j < Fsize; j++) {
-				e = e +( W.get(j)*((star.get(j) - data.get(i).get(j))/(star.get(j) - minus.get(j)))); 
-				R_buf.add(W.get(j)*((star.get(j) - data.get(i).get(j))/(star.get(j) - minus.get(j))));
+			for(int j  = 0; j < W.size(); j++) {
+				e = e +VikorS(W.get(j),i,j);
+				R_buf.add(VikorR(W.get(j), i,j));
 				System.out.println(e+" S\n");
+				System.out.println(R_buf.toString()+" R_buf\n");
 			}
-			Collections.sort(R_buf);
-			R.add(R_buf.get(R_buf.size()-1));
+			//System.out.println(R_buf.toString()+" R_buf\n");
+			//Collections.sort(R_buf);
+			R.add(Collections.max(R_buf));
 			S.add(e);
 		}
 		System.out.println(R.toString()+"-R");
@@ -164,26 +168,36 @@ public class VikorCalculation {
 		qq = Controller.altname;
 		return qq;
 	}
-	public Double VikorS(double w,int c){
-		
+	public Double VikorS(double w,int c, int critnumber){
+		ObservableList<Double> wg = FXCollections.observableArrayList();
+		wg = W;
+		wg.set(critnumber, w);
+		System.out.println(wg.size()+" size");	
+		System.out.println(wg.toString()+" size");
 			double S = 0;
-			double e = 0;
-			for(int j  = 0; j < Controller.list.size(); j++) {
-				
-				S = e + w*((star.get(j) - d.get(c).get(j))/(star.get(j) - minus.get(j)));
-				e = S;
+			for(int j  = 0; j < wg.size(); j++) {
+				S = S + wg.get(j)*((star.get(j) - d.get(c).get(j))/(star.get(j) - minus.get(j)));	
 			}
 		
 		return S;
 	}
-	public Double VikorR(double w,int c){
-		
+	public Double VikorR(double newValue,int c, int critnumber){
+			
 			double R = 0;
 			ObservableList<Double> R1 = FXCollections.observableArrayList();
+			ObservableList<Double> wg = FXCollections.observableArrayList();
+			wg = W;
+			wg.set(critnumber, newValue);
+			System.out.println(wg.size()+" size");	
+			System.out.println(wg.toString()+" size");
 			for(int j  = 0; j < Controller.list.size(); j++) {
-				R1.add(w*((star.get(j) - d.get(c).get(j))/(star.get(j) - minus.get(j))));
+				R1.add(wg.get(j)*((star.get(j) - d.get(c).get(j))/(star.get(j) - minus.get(j))));
+				System.out.println(d.get(c).get(j)+" d.get(c).get(j) from vikor");
 			}
+			
 		R = Collections.max(R1);
+		System.out.println(R+" r from vikor");	
+		System.out.println(newValue+" newValue from vikor");
 		return R;
 	}
 }

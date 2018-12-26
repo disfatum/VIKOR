@@ -1,6 +1,7 @@
 package org.vikor.controller;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,76 +39,80 @@ public class DominationController {
    
     @FXML
     void initialize() {
-    	ObservableList<ObservableList<Double>> data_buf = FXCollections.observableArrayList();
-    	ObservableList<ObservableList<Double>> data_min = FXCollections.observableArrayList();
+    	ObservableList<List<Double>> data_buf = FXCollections.observableArrayList();
     	ObservableList<List<Double>> data = FXCollections.observableArrayList();
-    	ObservableList<List<Double>> ser = FXCollections.observableArrayList();
-    	for(int j = 0; j < Controller.data1.get(0).size();j++) {
+    	ObservableList<List<Double>> datas = FXCollections.observableArrayList();
+    	for(int i = 0; i < Controller.data1.size();i++) {
     		List<Double> l = FXCollections.observableArrayList();
-    		for(int i =0; i < Controller.data1.size();i++) {
+    		for(int j =0;j < Controller.data1.get(0).size();j++) {
     			l.add(Controller.data1.get(i).get(j));
     		}
     		data.add(l);
     	}
-        for(int i = 0; i < data.size(); i++) {
-        	ObservableList<Double> f = FXCollections.observableArrayList();
-        	for(int j = 0; j < data.get(i).size();j++) {
-        		f.add(data.get(i).get(j));
-        	}
-        	data_buf.add(f.sorted());
-        }
-        for(int i = 0; i < data_buf.size(); i++) {
-        	ObservableList<Double> f = FXCollections.observableArrayList();
-        	for(int j = data_buf.get(i).size()-1; j >= 0;j--) {
-        		f.add(data_buf.get(i).get(j));
-        	}
-        	data_min.add(f);
-        }
-        list = Controller.list;
+    	list = Controller.list;
+    	double counterrank = 0;
+    	for(int i = 0; i < data.size();i++) {
+    		List<Double> l = FXCollections.observableArrayList();
+    		for(int j = 0; j < data.get(i).size();j++) {
+    			counterrank =0;
+    			for(int i1 = 0; i1 < data.size();i1++) {
+    	    		for(int j1 = 0; j1 < data.get(i1).size();j1++) {
+    	    			if(list.get(i).getMaxmin().equals("MAX")) {
+	    	    			if(data.get(i).get(j) > data.get(i1).get(j1) | 
+	    	    					data.get(i).get(j) == data.get(i1).get(j1) ) {
+	    	    				counterrank = counterrank + 1;
+	    	    			}
+    	    			}
+	    	    		if(list.get(i).getMaxmin().equals("MIN")) {
+	    	    			if(data.get(i).get(j) < data.get(i1).get(j1) |
+	    	    					data.get(i).get(j) == data.get(i1).get(j1)) {
+	    	    				counterrank = counterrank+1;
+	    	    			}
+	    	      		}
+    	    		}
+    	    		
+    	    	}l.add(counterrank);
+    			
+    		}datas.add(l);
+    	}
+    	System.out.println(data.toString());
+    	System.out.println(datas.toString() +" datas");
         
-       for(int i = 0; i < data.size();i++) {
-    	   ObservableList<Double> c = FXCollections.observableArrayList();
-    	   for(int j =0; j < data.get(i).size();j++) {
-    		   
-    		   if(list.get(i).getMaxmin().equals("MAX")) {
-    			   c.add((double)data_buf.get(i).indexOf(data.get(i).get(j)));
-    		   }
-    		   if(list.get(i).getMaxmin().equals("MIN")) {
-    			   c.add((double)data_min.get(i).indexOf(data.get(i).get(j)));
-    		   }
-    	   }
-    	   ser.add(c);
-       }
-      System.out.println(ser.toString()+" ser");
-      
-      
+        
       List<Double> dom1 = FXCollections.observableArrayList();
+      List<Double> dom2 = FXCollections.observableArrayList();
       List<String> domst = FXCollections.observableArrayList();
-      for(int i = 0; i < ser.get(0).size();i++) {
-    	  double buf = 0;
-    	  
-    	  for(int j = 0; j < ser.size(); j++) {
-    		  buf = buf + ser.get(j).get(i);
+      for(int i = 0; i < datas.get(0).size();i++)  {
+    	  List<Double> l = FXCollections.observableArrayList();
+    	  for(int j = 0; j < datas.size();j++) {
+    		  l.add(datas.get(j).get(i));
     	  }
-    	  dom1.add(buf);
+    	data_buf.add(l);  
       }
-      System.out.println(dom1.toString()+" dom1");
+      for(int i = 0; i < datas.size();i++) {
+    	 dom1.add(Collections.max(data_buf.get(i)));
+    	 dom2.add(Collections.min(data_buf.get(i)));
+      }
+      String s = "";
+      System.out.println(dom1.toString() +" dom1");
+      System.out.println(dom2.toString() +" dom2");
       for(int i = 0; i < dom1.size();i++) {
-    	  String buf = "";
-    	 for(int j = 0; j < dom1.size(); j++) {
-    		 if(dom1.get(i) < dom1.get(j)) {
-    			 buf = buf+Controller.altname.get(j)+" ; ";
-    		 }
-    	 }
-    	 if(!buf.equals("")) {
-    		 String b = "Доминируется: "+buf;
-    		 domst.add(b);
-    	 }else {
-    		 String s = "Не доминируется";
-    		 domst.add(s);
-    	 }
-      }System.out.println(domst+"domst");
-      
+    	  s = "";
+    	  for(int j = 0; j < dom1.size();j++) {
+    		  if(dom1.get(i) < dom1.get(j) && dom2.get(i) < dom2.get(j)) {
+    			  s = s+Controller.altname.get(j);
+    			  s = s+";";
+    		  }
+    	  }
+    	  if(s == "") {
+    		  s = "Не доминируется";
+    	  }
+    	  else {
+    		  s = "Доминируется:"+s;
+    	  }
+    	  domst.add(s);
+      }
+     
       for(int i = 0; i < domst.size();i++) {
     	   List<String> row =  FXCollections.observableArrayList();
     	  row.add(Controller.altname.get(i));

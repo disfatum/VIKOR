@@ -106,18 +106,23 @@ public class SRwController {
         	    for(int i =0; i < Controller.altname.size();i++) {
         	    	Series<Number, Number> series1= new Series<>();
         	    	for(int j = 0; j < w.size();j++) {
-        	    		double tt = t.VikorS(w.get(j), i);
+        	    		double tt = t.VikorS(w.get(j), i,critn.indexOf(ComboBox.getValue()));
         	    		g.add(tt);
         	    		double y =w.get(j);
         	    		series1.getData().add(new Data<Number,Number>(y,tt));
         	    	}
-        	    	series1.setName("S"+i);
+        	    	series1.setName("S "+Controller.altname.get(i));
         	    	chartDatas.add(series1);
         	    }
         	    max = Collections.max(g);
         	    min = Collections.min(g);
         	    Series<Number, Number> series2 = new Series<>();
-                series2.getData().add(new Data<Number,Number>(newValue,min));
+        	    if(min > 0) {
+                    series2.getData().add(new Data<Number,Number>(newValue,0));
+        	    }
+        	    else {
+        	    	series2.getData().add(new Data<Number,Number>(newValue,min));
+        	    }
                 series2.getData().add(new Data<Number,Number>(newValue,max));
                 series2.setName("w");
                 chartDatas.add(series2);
@@ -125,7 +130,7 @@ public class SRwController {
                 
                 TextAreaS.appendText("при w="+newValue+"\n");
                 for(int i =0; i < Controller.altname.size();i++) {
-                	TextAreaS.appendText("S"+i+"="+t.VikorS((double)newValue, i)+"\n");
+                	TextAreaS.appendText("S "+Controller.altname.get(i)+"="+t.VikorS((double)newValue, i,critn.indexOf(ComboBox.getValue()))+"\n");
                 }
             }
        });
@@ -144,18 +149,23 @@ public class SRwController {
         	    for(int i =0; i < Controller.altname.size();i++) {
         	    	Series<Number, Number> series1= new Series<>();
         	    	for(int j = 0; j < w.size();j++) {
-        	    		double tt = t.VikorR(w.get(j), i);
+        	    		double tt = t.VikorR(w.get(j), i, critn.indexOf(ComboBox.getValue()));
         	    		g.add(tt);
         	    		double y =w.get(j);
         	    		series1.getData().add(new Data<Number,Number>(y,tt));
         	    	}
-        	    	series1.setName("R"+i);
+        	    	series1.setName("R "+Controller.altname.get(i));
         	    	chartDatar.add(series1);
         	    }
         	    max = Collections.max(g);
         	    min = Collections.min(g);
         	    Series<Number, Number> series2 = new Series<>();
-                series2.getData().add(new Data<Number,Number>(newValue,min));
+        	    if(min > 0) {
+                    series2.getData().add(new Data<Number,Number>(newValue,0));
+        	    }
+        	    else {
+        	    	series2.getData().add(new Data<Number,Number>(newValue,min));
+        	    }
                 series2.getData().add(new Data<Number,Number>(newValue,max));
                 series2.setName("w");
                 chartDatar.add(series2);
@@ -163,7 +173,7 @@ public class SRwController {
                 
                 TextAreaR.appendText("при w="+newValue+"\n");
                 for(int i =0; i < Controller.altname.size();i++) {
-                	TextAreaR.appendText("R"+i+"="+t.VikorR((double)newValue, i)+"\n");
+                	TextAreaR.appendText("R "+Controller.altname.get(i)+"="+t.VikorR(Double.valueOf(newValue.toString()), i,critn.indexOf(ComboBox.getValue()))+"\n");
                 }
             }
             
