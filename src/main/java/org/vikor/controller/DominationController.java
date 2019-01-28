@@ -41,7 +41,6 @@ public class DominationController {
     void initialize() {
     	ObservableList<List<Double>> data_buf = FXCollections.observableArrayList();
     	ObservableList<List<Double>> data = FXCollections.observableArrayList();
-    	ObservableList<List<Double>> datas = FXCollections.observableArrayList();
     	for(int i = 0; i < Controller.data1.size();i++) {
     		List<Double> l = FXCollections.observableArrayList();
     		for(int j =0;j < Controller.data1.get(0).size();j++) {
@@ -50,46 +49,21 @@ public class DominationController {
     		data.add(l);
     	}
     	list = Controller.list;
-    	double counterrank = 0;
-    	for(int i = 0; i < data.size();i++) {
-    		List<Double> l = FXCollections.observableArrayList();
-    		for(int j = 0; j < data.get(i).size();j++) {
-    			counterrank =0;
-    			for(int i1 = 0; i1 < data.size();i1++) {
-    	    		for(int j1 = 0; j1 < data.get(i1).size();j1++) {
-    	    			if(list.get(i).getMaxmin().equals("MAX")) {
-	    	    			if(data.get(i).get(j) > data.get(i1).get(j1) | 
-	    	    					data.get(i).get(j) == data.get(i1).get(j1) ) {
-	    	    				counterrank = counterrank + 1;
-	    	    			}
-    	    			}
-	    	    		if(list.get(i).getMaxmin().equals("MIN")) {
-	    	    			if(data.get(i).get(j) < data.get(i1).get(j1) |
-	    	    					data.get(i).get(j) == data.get(i1).get(j1)) {
-	    	    				counterrank = counterrank+1;
-	    	    			}
-	    	      		}
-    	    		}
-    	    		
-    	    	}l.add(counterrank);
-    			
-    		}datas.add(l);
-    	}
     	System.out.println(data.toString());
-    	System.out.println(datas.toString() +" datas");
         
         
       List<Double> dom1 = FXCollections.observableArrayList();
       List<Double> dom2 = FXCollections.observableArrayList();
       List<String> domst = FXCollections.observableArrayList();
-      for(int i = 0; i < datas.get(0).size();i++)  {
+      for(int i = 0; i < data.size();i++)  {
     	  List<Double> l = FXCollections.observableArrayList();
-    	  for(int j = 0; j < datas.size();j++) {
-    		  l.add(datas.get(j).get(i));
+    	  for(int j = 0; j < data.get(0).size();j++) {
+    		  l.add(data.get(i).get(j));
     	  }
     	data_buf.add(l);  
       }
-      for(int i = 0; i < datas.size();i++) {
+      
+      for(int i = 0; i < data.size();i++) {
     	 dom1.add(Collections.max(data_buf.get(i)));
     	 dom2.add(Collections.min(data_buf.get(i)));
       }

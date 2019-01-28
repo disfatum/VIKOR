@@ -271,7 +271,7 @@ void initialize() {
 	});
 	AddOkButton.setOnAction(event-> {
 		
-		if (!AddNameButton.getText().equals("")) {
+		if (!AddNameButton.getText().equals("") && ListforDelete.indexOf(AddNameButton.getText())== -1) {
 			ListforDelete.add(AddNameButton.getText());
 			ComboBoxDelete.setItems(ListforDelete);
 			ComboBoxDelete.setValue(AddNameButton.getText());
@@ -307,8 +307,8 @@ void initialize() {
 				Alert alert = new Alert(AlertType.WARNING);
 		        alert.initOwner(Main.getPrimaryStage());
 		        alert.setTitle("Ошибка");
-		        alert.setHeaderText("Пустое поле");
-		        alert.setContentText("Укажите название критерия/альтернативы");
+		        alert.setHeaderText("Неправильное заполнение");
+		        alert.setContentText("Укажите другое название критерия/альтернативы");
 		        alert.showAndWait();	
 		}
 	});

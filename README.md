@@ -1,1 +1,2 @@
 # VIKOR
+Original vikor method

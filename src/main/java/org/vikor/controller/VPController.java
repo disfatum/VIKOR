@@ -3,17 +3,23 @@ package org.vikor.controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import org.vikor.data.ftabledata.FunctionData;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 public class VPController {
 
@@ -79,21 +85,60 @@ public class VPController {
     	   }
     	   ser.add(c);
        }
+       double c = 0;
        for(int j = 0; j < ser.get(0).size();j++) {
     	   Series<Number, Number> series1= new Series<>();
         for(int i =0; i < ser.size(); i++) {
-        	
+        		c = i+0.5;
         		double q = ser.get(i).get(j)+0.1;
-        		series1.getData().add(new Data<Number,Number>(i,q));
+        		final Data<Number, Number> d3 = new XYChart.Data<>(c,q);
+        		d3.setNode(new HoveredThresholdNodea(""+Controller.list.get(i).getFullName(),"Альтернатива:"+ Controller.altname.get(j)));
+        		series1.getData().add(d3);
         	}
         series1.setName(Controller.altname.get(j));
-        chartData.add(series1);
-        }
-        int s = ser.get(0).size();
-        xAxis.setUpperBound(s);
+        LineChart.getData().add(series1);
+        //chartData.add(series1);
+		
+        } 
+        xAxis.setUpperBound(c+0.5);
         xAxis.setLowerBound(0);
         yAxis.setUpperBound(Controller.altname.size());
         yAxis.setLowerBound(0);
-        LineChart.setData(chartData);
+        //LineChart.setData(chartData); 
+    }
+    class HoveredThresholdNodea extends StackPane {
+
+        public HoveredThresholdNodea(String string, Object object) {
+            setPrefSize(15, 15);
+
+            final Label label = createDataThresholdLabel(string, object);
+
+            setOnMouseEntered(new EventHandler<Event>() {
+                
+				@Override
+				public void handle(Event event) {
+					getChildren().setAll(label);
+                    setCursor(Cursor.NONE);
+                    toFront();
+				}
+            });
+            setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    getChildren().clear();
+                }
+            });
+        }
+
+        private Label createDataThresholdLabel(String string, Object object) {
+            final Label label = new Label(string+"");
+            label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+            label.setStyle("-fx-font-size: 20; -fx-font-weight: bold;");
+
+                label.setTextFill(Color.RED);
+                label.setStyle("-fx-border-color: RED;");
+            label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+            return label;
+        }
     }
 }

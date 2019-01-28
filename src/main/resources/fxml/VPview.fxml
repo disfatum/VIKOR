@@ -15,7 +15,7 @@
             <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #2e3348;" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <LineChart fx:id="LineChart" animated="false" BorderPane.alignment="CENTER">
+            <LineChart fx:id="LineChart" animated="false" cache="true" cacheHint="SCALE_AND_ROTATE" BorderPane.alignment="CENTER">
               <xAxis>
                 <NumberAxis animated="false" autoRanging="false" minorTickVisible="false" side="BOTTOM" tickLabelsVisible="false" tickMarkVisible="false" fx:id="xAxis" />
               </xAxis>
